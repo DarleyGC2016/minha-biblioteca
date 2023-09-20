@@ -1,0 +1,29 @@
+.lista {
+    width: 100vw;
+    height: 100vh;  
+}
+
+/* .listagem{
+    display: flex;
+    justify-content: center;
+} */
+
+li {
+    list-style: none;
+}
+
+.item {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 30px;
+}
+
+.btn {
+    border: 1px solid #5454ed;
+    border-radius: 3px;
+    color: #fff;
+    background-color: #4db1db;
+    padding: 5px 15px;
+    text-decoration: none;
+}
