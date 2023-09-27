@@ -1,7 +1,7 @@
 import './estilo.css'
 import { Link, useParams } from "react-router-dom"
 import { useFetch } from "../../hooks/useFetch"
-import { useCallback, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 
 import Api from "../../services/api"
 import styled from 'styled-components'
@@ -35,6 +35,20 @@ function BookDetail() {
     const { data, mutate } = useFetch(`livros/${id}`)
     const [nome, setNome] = useState('');
 
+    const getLivro = async () => {
+        try {
+            const resposta = await Api.get(`/livros/${id}`)
+            console.log('resposta: ',resposta.data);
+            setNome(resposta.data.nome)
+        } catch (error) {
+            console.log(`Erro: ${error}`);
+        }  
+    }
+
+    useEffect(() => {
+        getLivro()
+    })
+
     const bookUpdate = useCallback(async (id, nome) => {
         Api.put(`livros/${id}`, {
             nome: nome
@@ -67,8 +81,7 @@ function BookDetail() {
             <FormularioContainer>
                 <form onSubmit={cadastrar}>
                     <Label>Nome:</Label> <br/>
-                    <Input type="text"                        
-                        placeholder={data.nome}
+                    <Input type="text"                       
                         value={nome}
                         onChange={ e => setNome(e.target.value)}
                     />

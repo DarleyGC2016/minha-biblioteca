@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import BookList from "./components/BooksList";
-import BookDetail from "./components/BookDetail";
+import BookList from "./pages/BooksList";
+import BookDetail from "./pages/BookDetail";
 
 function AppRoutes(){
     return (
