@@ -1,14 +1,14 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import BookList from "./components/BooksList";
-import BookDetail from "./components/BookDetail";
+import BookList from "./pages/BooksList";
+import BookDetail from "./pages/BookDetail";
 
 function AppRoutes(){
     return (
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<BookList />}></Route>
-                <Route path="/livros/:id" element={<BookDetail />}></Route>
+                <Route path="/editar/:id" element={<BookDetail />}></Route>
             </Routes>
         </BrowserRouter>
     );

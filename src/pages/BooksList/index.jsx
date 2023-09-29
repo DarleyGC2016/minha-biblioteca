@@ -32,7 +32,7 @@ function BookList() {
                         data.map(livro => (
                             <li key={livro.id} className='item'>
                                 {livro.nome}
-                                <Link to={`/livros/${livro.id}`} className='btn'>
+                                <Link to={`/editar/${livro.id}`} className='btn'>
                                     Editar   
                                 </Link>
                                 <button type="button" className='btn-excluir' onClick={() => bookUpdate(livro.id)}>
