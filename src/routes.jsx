@@ -8,7 +8,7 @@ function AppRoutes(){
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<BookList />}></Route>
-                <Route path="/livros/:id" element={<BookDetail />}></Route>
+                <Route path="/editar/:id" element={<BookDetail />}></Route>
             </Routes>
         </BrowserRouter>
     );

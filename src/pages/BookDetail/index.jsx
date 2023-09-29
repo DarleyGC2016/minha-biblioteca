@@ -1,53 +1,41 @@
-import './estilo.css'
-import { Link, useParams } from "react-router-dom"
-import { useFetch } from "../../hooks/useFetch"
+// import './estilo.css
+import { useNavigate, useParams } from "react-router-dom"
 import { useCallback, useEffect, useState } from "react"
 
 import Api from "../../services/api"
-import styled from 'styled-components'
-
-const Painel = styled.section`
-    background-color: #EBECEE;
-    padding-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-`
-const FormularioContainer = styled.div`
-    margin-top: 30px;
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    cursor: pointer;
-`
-export const Label = styled.label`
-    width: 100%;
-    padding: 30px 0;
-    text-align: center;
-`    
-export const Input = styled.input` 
-    display: flex  
-    text-align: center;
-    margin-top: 10px;
-` 
+import { useFetch } from "../../hooks/useFetch";
 
 function BookDetail() {
     const { id } = useParams()
+    const [livro, setLivro] = useState();
+    const [tempLivro, setTempLivro] = useState();
+    const [changed, setChanged] = useState(false);
     const { data, mutate } = useFetch(`livros/${id}`)
-    const [nome, setNome] = useState('');
+    const navegacao = useNavigate()
+    
 
-    const getLivro = async () => {
+    const getLivro = async (id) => {
         try {
-            const resposta = await Api.get(`/livros/${id}`)
-            console.log('resposta: ',resposta.data);
-            setNome(resposta.data.nome)
+            const resposta =  await Api.get(`/livros/${id}`)
+            const data = resposta.data
+            setLivro(data)
+            setTempLivro(data)
         } catch (error) {
-            console.log(`Erro: ${error}`);
-        }  
+            console.log("Erro: ", error);
+        } 
     }
 
     useEffect(() => {
-        getLivro()
-    })
+        getLivro(id)     
+        
+    },[id])
+
+    const editar = (e) => {
+        e.preventDefault();        
+        setChanged(false)
+        bookUpdate(id, tempLivro.nome)
+        navegacao('/')
+    }
 
     const bookUpdate = useCallback(async (id, nome) => {
         Api.put(`livros/${id}`, {
@@ -67,30 +55,32 @@ function BookDetail() {
         
     },[ data, mutate ])
 
-    if (!data) {
-        return <p>Carregando...</p>
-    }
-    
-    function cadastrar(e) {
-        e.preventDefault();
-        bookUpdate(id, nome);
-    }
-    
     return (
-        <Painel>
-            <FormularioContainer>
-                <form onSubmit={cadastrar}>
-                    <Label>Nome:</Label> <br/>
-                    <Input type="text"                       
-                        value={nome}
-                        onChange={ e => setNome(e.target.value)}
-                    />
-                    <Link to="/" className="btn">
-                        Voltar
-                    </Link>
-                </form>
-            </FormularioContainer>
-        </Painel>
+            <>
+                {livro ?        
+                    <form onSubmit={(e)=> editar(e)}> 
+                        <div>
+                            <label>Nome:</label>
+                            <input 
+                                type="text"
+                                value={ tempLivro.nome }
+                                onChange={(e) => {
+                                                    setChanged(true);
+                                                    setTempLivro({...tempLivro , nome: e.currentTarget.value})}
+                                                }/> 
+                        </div>                        
+                        {changed ? 
+                            <>
+                                <button onClick={(e) => {
+                                    setTempLivro({...livro})
+                                    setChanged(false)
+                                }}>Cancelar</button>
+                                <input type="submit" value="Salvar" />
+                            </>
+                        : null}
+                    </form>
+                : <p>Carregando...</p>}
+            </>
     )
 }
 

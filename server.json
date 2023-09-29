@@ -1,20 +1,16 @@
 {
   "livros": [
     {
-      "nome": "Aprendendo a programar 134",
+      "nome": "Aprendendo a programar 4",
       "id": 1
     },
     {
-      "nome": "Aprendendo a programar 12",
+      "nome": "Aprendendo a programa 5",
       "id": 2
     },
     {
-      "nome": "Aprendendo 3",
+      "nome": "Harry Potter e a Pedra Filosofal",
       "id": 3
-    },
-    {
-      "id": 4,
-      "nome": "Aprendendo a programar 4"
     }
   ]
 }
