@@ -1,16 +1,32 @@
 {
   "livros": [
     {
-      "nome": "Aprendendo a programar 4",
-      "id": 1
-    },
-    {
-      "nome": "Aprendendo a programa 5",
+      "nome": "Ben-Hur",
+      "anoPublicacao": "1880",
+      "autor": "Lew Wallace",
+      "sinopse": "historia que passa no tempo de Jesus",
       "id": 2
     },
     {
-      "nome": "Harry Potter e a Pedra Filosofal",
+      "nome": "Harry Potter e a Câmera Secreta",
+      "anoPublicacao": "2006",
+      "autor": "Laura",
+      "sinopse": "historia do Harry Potter",
       "id": 3
+    },
+    {
+      "nome": "Harry Potter e o Cálice de Fogo",
+      "anoPublicacao": "2008",
+      "autor": "J. K. Rowling",
+      "sinopse": "historia do harry potter",
+      "id": 4
+    },
+    {
+      "nome": "Caçadores de Bons Exemplos",
+      "anoPublicacao": "2016",
+      "autor": "Iara | Eduardo Xavier",
+      "sinopse": "Colecionadores de bons exemplos",
+      "id": 5
     }
   ]
 }

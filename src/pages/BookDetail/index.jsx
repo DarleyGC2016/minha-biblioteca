@@ -4,6 +4,8 @@ import { useCallback, useEffect, useState } from "react"
 
 import Api from "../../services/api"
 import { useFetch } from "../../hooks/useFetch";
+import NewFieldInput from "../../components/NewFieldInput/NewFieldInput";
+import NewFieldTextArea from "../../components/NewFieldTextArea/NewFieldTextArea";
 
 function BookDetail() {
     const { id } = useParams()
@@ -18,6 +20,7 @@ function BookDetail() {
         try {
             const resposta =  await Api.get(`/livros/${id}`)
             const data = resposta.data
+            console.log('data: ',data);
             setLivro(data)
             setTempLivro(data)
         } catch (error) {
@@ -33,18 +36,25 @@ function BookDetail() {
     const editar = (e) => {
         e.preventDefault();        
         setChanged(false)
-        bookUpdate(id, tempLivro.nome)
+        bookUpdate(tempLivro)
         navegacao('/')
     }
 
-    const bookUpdate = useCallback(async (id, nome) => {
+    const bookUpdate = useCallback(async (livro) => {
         Api.put(`livros/${id}`, {
-            nome: nome
+            nome: livro.nome,
+            anoPublicacao: livro.anoPublicacao,
+            autor: livro.autor,
+            sinopse: livro.sinopse
         })
         if (!data) {
             data?.map(livro => {
                 if (livro.id === id){
-                    mutate({...livro, nome: nome})
+                    mutate({...livro, nome: livro.nome,
+                            anoPublicacao: livro.anoPublicacao,
+                            autor: livro.autor,
+                            sinopse: livro.sinopse
+                           })
                     return livro;
                 }
                 return livro;
@@ -53,22 +63,56 @@ function BookDetail() {
             mutate(false) 
         }           
         
-    },[ data, mutate ])
+    },[ id, data, mutate ])
 
     return (
             <>
                 {livro ?        
-                    <form onSubmit={(e)=> editar(e)}> 
-                        <div>
-                            <label>Nome:</label>
-                            <input 
-                                type="text"
-                                value={ tempLivro.nome }
-                                onChange={(e) => {
-                                                    setChanged(true);
-                                                    setTempLivro({...tempLivro , nome: e.currentTarget.value})}
-                                                }/> 
-                        </div>                        
+                    <form onSubmit={(e)=> editar(e)}>   
+                        <NewFieldInput 
+                            label="Nome:"
+                            type="text"
+                            name="nome"
+                            id="nome"
+                            value={tempLivro.nome}
+                            change={(e) => {
+                                setChanged(true);
+                                setTempLivro({...tempLivro , nome: e.currentTarget.value})
+                            }}
+                        />  
+                        <NewFieldInput 
+                            label="Publicação:"
+                            type="text"
+                            name="publicacao"
+                            id="publicacao"
+                            placeholder="Digite o publicacao do livro..."
+                            value={tempLivro.anoPublicacao}
+                            maxLength="4"
+                            change={(e) => {
+                                setChanged(true)
+                                setTempLivro({...tempLivro , anoPublicacao: e.currentTarget.value})
+                        }}/>
+                        <NewFieldInput 
+                            label="Autor do Livro:"
+                            type="text"
+                            name="autor"
+                            id="autor"
+                            value={tempLivro.autor}
+                            change={(e) => {
+                                setChanged(true)
+                                setTempLivro({...tempLivro , autor: e.currentTarget.value})
+                            }}
+                        />  
+                        <NewFieldTextArea
+                            label="Sinopse:"
+                            name="sinopse"
+                            id="sinopse"
+                            value={tempLivro.sinopse}
+                            change={(e) => {
+                                setChanged(true)
+                                setTempLivro({...tempLivro , sinopse: e.currentTarget.value})
+                            }}
+                        />                    
                         {changed ? 
                             <>
                                 <button onClick={(e) => {

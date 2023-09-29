@@ -1,8 +1,14 @@
-import AppRoutes from './routes';
+import { Outlet } from 'react-router';
+import NaveBar from './components/navBar/NaveBar';
 
 function App() {
   return (
-      <AppRoutes />
+    <>
+      <NaveBar />
+      <>
+        <Outlet />
+      </>
+    </>
   );
 }
 
