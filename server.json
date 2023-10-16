@@ -1,7 +1,7 @@
 {
   "livros": [
     {
-      "nome": "Ben-Hur",
+      "nome": "BEN-HUR",
       "anoPublicacao": "1880",
       "autor": "Lew Wallace",
       "sinopse": "historia que passa no tempo de Jesus",
@@ -27,6 +27,13 @@
       "autor": "Iara | Eduardo Xavier",
       "sinopse": "Colecionadores de bons exemplos",
       "id": 5
+    },
+    {
+      "nome": "O Guia  para o Palestrante Empresarial",
+      "anoPublicacao": "2008",
+      "autor": "Fernando Anselmo",
+      "sinopse": "Como fazer uma boa palestra",
+      "id": 6
     }
   ]
 }
