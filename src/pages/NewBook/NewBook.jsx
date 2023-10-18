@@ -36,12 +36,23 @@ const NewBook = () => {
     navegacao("/")
 
   }
+
   const validacaoCampos = async () => {
     let schemaValidacao = yup.object().shape({
-      sinopse: yup.string("Sinopse está invalido!").required("Sinopse está invalido!"),
-      autor: yup.string("Nome do autor está invalido!").required("Nome do autor está invalido!"),
-      anoPublicacao: yup.string("Ano publicado está invalido!").matches("^[0-9]{4}$", "Ano publicado está invalido!").required("Ano publicado está invalido!"),
-      nome: yup.string("Nome está invalido!").required("Nome está invalido!"),
+      sinopse: yup.string("Sinopse está invalido!")
+                        .required("Sinopse está invalido!")
+                        .min(15, "A sinopse tem ser maior que 15 letras")
+                        .max(200, 'Passo do máximo permitido'),
+              autor: yup.string("Nome do autor está invalido!")
+                      .required("Nome do autor está invalido!")
+                      .min(6, "Nome do autor tem ser maior que 6 letras")
+                      .max(80, 'Passo do máximo permitido'),
+              anoPublicacao: yup.string("Ano publicado está invalido!")
+                              .matches("^[0-9]{4}$", "Ano publicado está invalido!")
+                              .required("Ano publicado está invalido!"),
+              nome: yup.string("Nome está invalido!")
+                      .required("Nome do livro está invalido!")
+                      .min(6, "Nome do livro tem ser maior que 6 letras").max(150, 'Passo do máximo permitido')
     })
     try {
         await schemaValidacao.validate(book)
@@ -53,13 +64,12 @@ const NewBook = () => {
       })
       return false
     }
-
   }
+
   return (
     <div>
       <form onSubmit={(e) => postBook(e)}>
         {status.type === 'error' ? <p style={{color: "#ff0000"}}>{status.message}</p>: ""}
-        {status.type === 'success' ? <p style={{color: "blue"}}>{status.message}</p>: ""}
         <NewFieldInput 
             label="Nome:"
             type="text"

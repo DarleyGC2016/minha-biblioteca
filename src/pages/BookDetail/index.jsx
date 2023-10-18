@@ -6,12 +6,17 @@ import Api from "../../services/api"
 import { useFetch } from "../../hooks/useFetch";
 import NewFieldInput from "../../components/NewFieldInput/NewFieldInput";
 import NewFieldTextArea from "../../components/NewFieldTextArea/NewFieldTextArea";
+import * as yup from 'yup'
 
 function BookDetail() {
     const { id } = useParams()
     const [livro, setLivro] = useState();
     const [tempLivro, setTempLivro] = useState();
     const [changed, setChanged] = useState(false);
+    const [status, setStatus] = useState({
+        type: '',
+        message: ''
+    })
     const { data, mutate } = useFetch(`livros/${id}`)
     const navegacao = useNavigate()
     
@@ -33,8 +38,9 @@ function BookDetail() {
         
     },[id])
 
-    const editar = (e) => {
-        e.preventDefault();        
+    const editar = async (e) => {
+        e.preventDefault(); 
+        if (!(await validacaoCampos())) return        
         setChanged(false)
         bookUpdate(tempLivro)
         navegacao('/')
@@ -54,7 +60,7 @@ function BookDetail() {
                             anoPublicacao: livro.anoPublicacao,
                             autor: livro.autor,
                             sinopse: livro.sinopse
-                           })
+                            })
                     return livro;
                 }
                 return livro;
@@ -65,10 +71,40 @@ function BookDetail() {
         
     },[ id, data, mutate ])
 
+    const validacaoCampos = async () => {
+        let schemaValidacao = yup.object().shape({
+            sinopse: yup.string("Sinopse está invalido!")
+                        .required("Sinopse está invalido!")
+                        .min(15, "A sinopse tem ser maior que 15 letras")
+                        .max(200, 'Passo do máximo permitido'),
+            autor: yup.string("Nome do autor está invalido!")
+                      .required("Nome do autor está invalido!")
+                      .min(6, "Nome do autor tem ser maior que 6 letras")
+                      .max(80, 'Passo do máximo permitido'),
+            anoPublicacao: yup.string("Ano publicado está invalido!")
+                              .matches("^[0-9]{4}$", "Ano publicado está invalido!")
+                              .required("Ano publicado está invalido!"),
+            nome: yup.string("Nome está invalido!")
+                     .required("Nome do livro está invalido!")
+                     .min(6, "Nome do livro tem ser maior que 6 letras").max(150, 'Passo do máximo permitido')
+        })
+        try {
+            await schemaValidacao.validate(tempLivro)
+            return true
+        } catch (error) {
+            setStatus({
+                type: 'error',
+                message: error.errors
+            })
+            return false
+        }
+    }
+
     return (
             <>
                 {livro ?        
                     <form onSubmit={(e)=> editar(e)}>   
+                        {status.type === 'error' ? <p style={{color: "#ff0000"}}>{status.message}</p>: ""}
                         <NewFieldInput 
                             label="Nome:"
                             type="text"
