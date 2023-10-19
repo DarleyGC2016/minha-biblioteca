@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router"
-import { Alert, Button, Stack } from "@mui/material"
+import { Alert, Button, Card, CardActions, CardContent, Typography } from "@mui/material"
 
 import './estilo.css'
 import { bookSchema } from "../../constants/bookSchema"
@@ -55,65 +55,73 @@ const NewBook = () => {
 
   return (
     <div className="form-novo">
-      {/* <p>Cadastrar Livros para Biblioteca</p> */}
-      <form onSubmit={(e) => postBook(e)}>
-        <Stack direction={{xs: 'column'}} spacing={2} width={400} justifyContent="center"> 
-          {status.type === "error"? <Alert severity="error">{status.message}</Alert>: ""}
-          <NewFieldInput 
-              label="Nome"
-              type="text"
-              name="nome"
-              id="nome"
-              placeholder="Digite o nome do livro..."
-              value={book.nome}
-              change={(e) => {
-                  setBook({...book,nome: e.target.value})
-              }}/>
-          <NewFieldInput 
-              label="Ano Publicado"
-              type="text"
-              name="pub"
-              id="pub"
-              placeholder="Digite ano da publicação..."
-              value={book.anoPublicacao}
-              change={(e) => {
-                setBook({...book, anoPublicacao: e.target.value})
-              }}
-              maxLength="4"
-            />
-            <NewFieldInput 
-                label="Autor do Livro"
-                type="text"
-                name="autor"
-                id="autor"
-                placeholder="Digite o nome do autor..."
-                value={book.autor}
-                maxLength="100"
-                change={(e) => {
-                  setBook({...book, autor: e.target.value})
-                }}/>
-            <NewFieldTextArea
-              label="Sinopse"
-              name="sinopse"
-              id="sinopse"
-              placeholder="Digite a sinopse do sinopse..."
-              value={book.sinopse}
-              change={(e) => {
-                setBook({...book, sinopse: e.target.value})
-              }}
-            />     
-          </Stack>
-          <Stack>
-              <Button sx={{ display: 'flex', justifyContent: "center",
-                            marginTop: "10px",
-                            marginLeft: "8px", width: 402}}
-                      variant="contained"
-                      type="submit"
-              >
-                Salvar
-              </Button>
-          </Stack>
-      </form>
+        <Card sx={{ minWidth: 275 }}>
+            {status.type === "error"? <Alert severity="error">{status.message}</Alert>: ""}
+            <form onSubmit={(e) => postBook(e)}>
+                <CardContent>
+                  <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                    <NewFieldInput 
+                          label="Nome"
+                          type="text"
+                          name="nome"
+                          id="nome"
+                          placeholder="Digite o nome do livro..."
+                          value={book.nome}
+                          change={(e) => {
+                              setBook({...book,nome: e.target.value})
+                          }}/>
+                  </Typography>
+                  <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                    <NewFieldInput 
+                          label="Ano Publicado"
+                          type="text"
+                          name="pub"
+                          id="pub"
+                          placeholder="Digite ano da publicação..."
+                          value={book.anoPublicacao}
+                          change={(e) => {
+                            setBook({...book, anoPublicacao: e.target.value})
+                          }}
+                          maxLength="4"
+                        />
+                  </Typography>
+                  <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                        <NewFieldInput 
+                          label="Autor do Livro"
+                          type="text"
+                          name="autor"
+                          id="autor"
+                          placeholder="Digite o nome do autor..."
+                          value={book.autor}
+                          change={(e) => {
+                            setBook({...book, autor: e.target.value})
+                          }}
+                        />
+                  </Typography>
+                  <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                      <NewFieldTextArea
+                        label="Sinopse"
+                        name="sinopse"
+                        id="sinopse"
+                        placeholder="Digite a sinopse do sinopse..."
+                        value={book.sinopse}
+                        change={(e) => {
+                          setBook({...book, sinopse: e.target.value})
+                        }}
+                      />  
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                        <Button sx={{ display: 'flex', justifyContent: "center",
+                                      marginLeft: "15px", marginTop: '2px', marginBottom: '25px' , width: 502}}
+                                variant="contained"
+                                type="submit"
+                        >
+                          Salvar
+                        </Button>
+                </CardActions>
+            </form>
+        </Card>
     </div>
   )
 }

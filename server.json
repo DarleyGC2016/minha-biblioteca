@@ -34,6 +34,13 @@
       "autor": "J.R.R. Tolkien",
       "sinopse": "Uma história mostra quando surgiu o anel do poder",
       "id": 7
+    },
+    {
+      "nome": "Bíblia Sagrada",
+      "anoPublicacao": "1450",
+      "autor": "Deus Todo Poderoso",
+      "sinopse": "São as palavras de Deus",
+      "id": 8
     }
   ]
 }
