@@ -7,7 +7,7 @@ import ListItemText from '@mui/material/ListItemText';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Api from "../../services/api"
 import './estilo.css'
-import { IconButton } from '@mui/material';
+import { Alert, IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import { blue, red } from '@mui/material/colors';
 
@@ -29,7 +29,13 @@ function BookList() {
     },[ data, mutate ])
     
     if (!data) {
-        return <p>Carregando...</p>
+        return (
+                    <div className='listagem'>
+                        <Alert severity="info" sx={{ display: 'flex', width: 702}}>
+                            Carregando...
+                        </Alert>
+                    </div>
+                )
     }
 
     return ( 

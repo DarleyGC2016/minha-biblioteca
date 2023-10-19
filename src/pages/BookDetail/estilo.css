@@ -1,21 +1,5 @@
-.btn {
-    border: 1px solid #5454ed;
-    border-radius: 3px;
-    color: #fff;
-    text-align: center;
-    background-color: #4db1db;
-    padding: 5px 15px;
-    margin-left: 10px;
-    margin-right: 10px;
-    text-decoration: none;
-}
-
-.btn-excluir {
-    border: 1px solid #5454ed;
-    border-radius: 3px;
-    color: #fff;
-    text-align: center;
-    background-color: #f12020;
-    padding: 5px 15px;
-    text-decoration: none;
+.form-editar {
+    display: flex;
+    justify-content: center;
+    margin-top: 150px;
 }

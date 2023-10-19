@@ -113,7 +113,7 @@ const NewBook = () => {
                 </CardContent>
                 <CardActions>
                         <Button sx={{ display: 'flex', justifyContent: "center",
-                                      marginLeft: "15px", marginTop: '2px', marginBottom: '25px' , width: 502}}
+                                      marginLeft: "15px", marginTop: '2px', marginBottom: '25px', width: 502}}
                                 variant="contained"
                                 type="submit"
                         >
