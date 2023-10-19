@@ -3,14 +3,12 @@
     height: 100vh;  
 }
 
-/* .listagem{
+.listagem{
     display: flex;
     justify-content: center;
-} */
+} 
 
-li {
-    list-style: none;
-}
+
 
 .item {
     display: flex;

@@ -1,9 +1,12 @@
 import { useState } from "react"
+import { useNavigate } from "react-router"
+import { Alert, Button, Stack } from "@mui/material"
+
+import './estilo.css'
+import { bookSchema } from "../../constants/bookSchema"
 import NewFieldInput from "../../components/NewFieldInput/NewFieldInput"
 import NewFieldTextArea from "../../components/NewFieldTextArea/NewFieldTextArea"
 import Api from "../../services/api"
-import { useNavigate } from "react-router"
-import * as yup from 'yup'
 
 const NewBook = () => { 
   const [book, setBook] = useState({
@@ -38,24 +41,8 @@ const NewBook = () => {
   }
 
   const validacaoCampos = async () => {
-    let schemaValidacao = yup.object().shape({
-      sinopse: yup.string("Sinopse está invalido!")
-                        .required("Sinopse está invalido!")
-                        .min(15, "A sinopse tem ser maior que 15 letras")
-                        .max(200, 'Passo do máximo permitido'),
-              autor: yup.string("Nome do autor está invalido!")
-                      .required("Nome do autor está invalido!")
-                      .min(6, "Nome do autor tem ser maior que 6 letras")
-                      .max(80, 'Passo do máximo permitido'),
-              anoPublicacao: yup.string("Ano publicado está invalido!")
-                              .matches("^[0-9]{4}$", "Ano publicado está invalido!")
-                              .required("Ano publicado está invalido!"),
-              nome: yup.string("Nome está invalido!")
-                      .required("Nome do livro está invalido!")
-                      .min(6, "Nome do livro tem ser maior que 6 letras").max(150, 'Passo do máximo permitido')
-    })
     try {
-        await schemaValidacao.validate(book)
+        await bookSchema.validate(book)
         return true
     } catch (error) {
       setStatus({
@@ -67,54 +54,65 @@ const NewBook = () => {
   }
 
   return (
-    <div>
+    <div className="form-novo">
+      {/* <p>Cadastrar Livros para Biblioteca</p> */}
       <form onSubmit={(e) => postBook(e)}>
-        {status.type === 'error' ? <p style={{color: "#ff0000"}}>{status.message}</p>: ""}
-        <NewFieldInput 
-            label="Nome:"
-            type="text"
-            name="nome"
-            id="nome"
-            placeholder="Digite o nome do livro..."
-            value={book.nome}
-            maxLength="100"
-            change={(e) => {
-                setBook({...book,nome: e.target.value})
-            }}/>
-        <NewFieldInput 
-            label="Ano Publicado:"
-            type="text"
-            name="pub"
-            id="pub"
-            placeholder="Digite ano da publicação..."
-            value={book.anoPublicacao}
-            change={(e) => {
-              setBook({...book, anoPublicacao: e.target.value})
-            }}
-            maxLength="4"
-          />
+        <Stack direction={{xs: 'column'}} spacing={2} width={400} justifyContent="center"> 
+          {status.type === "error"? <Alert severity="error">{status.message}</Alert>: ""}
           <NewFieldInput 
-              label="Autor do Livro:"
+              label="Nome"
               type="text"
-              name="autor"
-              id="autor"
-              placeholder="Digite o nome do autor..."
-              value={book.autor}
-              maxLength="100"
+              name="nome"
+              id="nome"
+              placeholder="Digite o nome do livro..."
+              value={book.nome}
               change={(e) => {
-                setBook({...book, autor: e.target.value})
+                  setBook({...book,nome: e.target.value})
               }}/>
-          <NewFieldTextArea
-            label="Sinopse:"
-            name="sinopse"
-            id="sinopse"
-            placeholder="Digite a sinopse do sinopse..."
-            value={book.sinopse}
-            change={(e) => {
-              setBook({...book, sinopse: e.target.value})
-            }}
-          />
-          <input type="submit" value="Salvar" />
+          <NewFieldInput 
+              label="Ano Publicado"
+              type="text"
+              name="pub"
+              id="pub"
+              placeholder="Digite ano da publicação..."
+              value={book.anoPublicacao}
+              change={(e) => {
+                setBook({...book, anoPublicacao: e.target.value})
+              }}
+              maxLength="4"
+            />
+            <NewFieldInput 
+                label="Autor do Livro"
+                type="text"
+                name="autor"
+                id="autor"
+                placeholder="Digite o nome do autor..."
+                value={book.autor}
+                maxLength="100"
+                change={(e) => {
+                  setBook({...book, autor: e.target.value})
+                }}/>
+            <NewFieldTextArea
+              label="Sinopse"
+              name="sinopse"
+              id="sinopse"
+              placeholder="Digite a sinopse do sinopse..."
+              value={book.sinopse}
+              change={(e) => {
+                setBook({...book, sinopse: e.target.value})
+              }}
+            />     
+          </Stack>
+          <Stack>
+              <Button sx={{ display: 'flex', justifyContent: "center",
+                            marginTop: "10px",
+                            marginLeft: "8px", width: 402}}
+                      variant="contained"
+                      type="submit"
+              >
+                Salvar
+              </Button>
+          </Stack>
       </form>
     </div>
   )

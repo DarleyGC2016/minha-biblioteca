@@ -1,20 +1,26 @@
+import { TextField } from "@mui/material";
+import { Box } from "@mui/system";
 
 const NewFieldInput = (props) => {
     return (
-        <div>
-            <label htmlFor={props.name}>
-                {props.label}                
-            </label>
-            <input 
-                type={props.type}
-                name={props.name}
+        <Box
+            sx={{
+                '& .MuiTextField-root': { m: 1, width: 500, maxWidth: '100%' },
+            }}
+        >
+            <TextField
                 id={props.id}
-                placeholder={props.value ? props.value : props.placeholder}
+                label={props.label}
                 value={props.value}
                 onChange={props.change}
-                maxLength={props.maxLength}
+                variant="standard"
+                name={props.name}
+                fullWidth
+                required
+                error={props.erro}
+                helperText={props.ajuda}
             />
-        </div>
+        </Box>
     )
 }
 

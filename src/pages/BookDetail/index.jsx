@@ -6,7 +6,10 @@ import Api from "../../services/api"
 import { useFetch } from "../../hooks/useFetch";
 import NewFieldInput from "../../components/NewFieldInput/NewFieldInput";
 import NewFieldTextArea from "../../components/NewFieldTextArea/NewFieldTextArea";
-import * as yup from 'yup'
+
+import { Stack } from "@mui/material";
+import Alert from '@mui/material/Alert';
+import { bookSchema } from "../../constants/bookSchema";
 
 function BookDetail() {
     const { id } = useParams()
@@ -25,7 +28,6 @@ function BookDetail() {
         try {
             const resposta =  await Api.get(`/livros/${id}`)
             const data = resposta.data
-            console.log('data: ',data);
             setLivro(data)
             setTempLivro(data)
         } catch (error) {
@@ -40,6 +42,7 @@ function BookDetail() {
 
     const editar = async (e) => {
         e.preventDefault(); 
+        
         if (!(await validacaoCampos())) return        
         setChanged(false)
         bookUpdate(tempLivro)
@@ -72,29 +75,13 @@ function BookDetail() {
     },[ id, data, mutate ])
 
     const validacaoCampos = async () => {
-        let schemaValidacao = yup.object().shape({
-            sinopse: yup.string("Sinopse está invalido!")
-                        .required("Sinopse está invalido!")
-                        .min(15, "A sinopse tem ser maior que 15 letras")
-                        .max(200, 'Passo do máximo permitido'),
-            autor: yup.string("Nome do autor está invalido!")
-                      .required("Nome do autor está invalido!")
-                      .min(6, "Nome do autor tem ser maior que 6 letras")
-                      .max(80, 'Passo do máximo permitido'),
-            anoPublicacao: yup.string("Ano publicado está invalido!")
-                              .matches("^[0-9]{4}$", "Ano publicado está invalido!")
-                              .required("Ano publicado está invalido!"),
-            nome: yup.string("Nome está invalido!")
-                     .required("Nome do livro está invalido!")
-                     .min(6, "Nome do livro tem ser maior que 6 letras").max(150, 'Passo do máximo permitido')
-        })
         try {
-            await schemaValidacao.validate(tempLivro)
+            await bookSchema.validate(tempLivro)
             return true
         } catch (error) {
             setStatus({
                 type: 'error',
-                message: error.errors
+                message: error.errors                    
             })
             return false
         }
@@ -103,61 +90,63 @@ function BookDetail() {
     return (
             <>
                 {livro ?        
-                    <form onSubmit={(e)=> editar(e)}>   
-                        {status.type === 'error' ? <p style={{color: "#ff0000"}}>{status.message}</p>: ""}
-                        <NewFieldInput 
-                            label="Nome:"
-                            type="text"
-                            name="nome"
-                            id="nome"
-                            value={tempLivro.nome}
-                            change={(e) => {
-                                setChanged(true);
-                                setTempLivro({...tempLivro , nome: e.currentTarget.value})
-                            }}
-                        />  
-                        <NewFieldInput 
-                            label="Publicação:"
-                            type="text"
-                            name="publicacao"
-                            id="publicacao"
-                            placeholder="Digite o publicacao do livro..."
-                            value={tempLivro.anoPublicacao}
-                            maxLength="4"
-                            change={(e) => {
-                                setChanged(true)
-                                setTempLivro({...tempLivro , anoPublicacao: e.currentTarget.value})
-                        }}/>
-                        <NewFieldInput 
-                            label="Autor do Livro:"
-                            type="text"
-                            name="autor"
-                            id="autor"
-                            value={tempLivro.autor}
-                            change={(e) => {
-                                setChanged(true)
-                                setTempLivro({...tempLivro , autor: e.currentTarget.value})
-                            }}
-                        />  
-                        <NewFieldTextArea
-                            label="Sinopse:"
-                            name="sinopse"
-                            id="sinopse"
-                            value={tempLivro.sinopse}
-                            change={(e) => {
-                                setChanged(true)
-                                setTempLivro({...tempLivro , sinopse: e.currentTarget.value})
-                            }}
-                        />                    
-                        {changed ? 
-                            <>
-                                <button onClick={(e) => {
-                                    setTempLivro({...livro})
-                                    setChanged(false)
-                                }}>Cancelar</button>
-                                <input type="submit" value="Salvar" />
-                            </>
-                        : null}
+                    <form onSubmit={(e)=> editar(e)}> 
+                        <Stack spacing={2} width={400}>  
+                            {status.type === "error"? <Alert severity="error">{status.message}</Alert>: ""}
+                            <NewFieldInput 
+                                label="Nome"
+                                type="text"
+                                name="nome"
+                                id="nome"
+                                value={tempLivro.nome}
+                                change={(e) => {
+                                    setChanged(true);
+                                    setTempLivro({...tempLivro , nome: e.currentTarget.value})
+                                }}
+                            />  
+                            <NewFieldInput 
+                                label="Publicação"
+                                type="text"
+                                name="publicacao"
+                                id="publicacao"
+                                placeholder="Digite o publicacao do livro..."
+                                value={tempLivro.anoPublicacao}
+                                change={(e) => {
+                                    setChanged(true)
+                                    setTempLivro({...tempLivro , anoPublicacao: e.currentTarget.value})
+                                }}
+                            />
+                            <NewFieldInput 
+                                label="Autor do Livro"
+                                type="text"
+                                name="autor"
+                                id="autor"
+                                value={tempLivro.autor}
+                                change={(e) => {
+                                    setChanged(true)
+                                    setTempLivro({...tempLivro , autor: e.currentTarget.value})
+                                }}
+                            />  
+                            <NewFieldTextArea
+                                label="Sinopse"
+                                name="sinopse"
+                                id="sinopse"
+                                value={tempLivro.sinopse}
+                                change={(e) => {
+                                    setChanged(true)
+                                    setTempLivro({...tempLivro , sinopse: e.currentTarget.value})
+                                }}
+                            />                    
+                            {changed ? 
+                                <>
+                                    <button onClick={(e) => {
+                                        setTempLivro({...livro})
+                                        setChanged(false)
+                                    }}>Cancelar</button>
+                                    <input type="submit" value="Salvar" />
+                                </>
+                            : null}
+                        </Stack>
                     </form>
                 : <p>Carregando...</p>}
             </>
