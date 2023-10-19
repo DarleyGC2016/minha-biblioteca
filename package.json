@@ -1,6 +1,6 @@
 {
   "name": "minha-biblioteca",
-  "version": "0.1.4-beta0",
+  "version": "0.1.5",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.1",
