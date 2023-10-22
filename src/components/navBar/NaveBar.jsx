@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,22 +11,16 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import SvgIcon from '@mui/material/SvgIcon';
 
 import './estilo.css'
 import { Stack } from '@mui/material';
+import HomeIcon from '../HomeIcon/HomeIcon';
 const pages = ['Cadastrar'];
 
-function HomeIcon(props) {
-  return (
-    <SvgIcon {...props}>
-      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-    </SvgIcon>
-  );
-}
 
 const NaveBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const navegacao = useNavigate()
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -35,9 +29,13 @@ const NaveBar = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+
+  const navCadastrar = () =>{
+    navegacao("/novo")
+  }
   
   return (
-    <nav>
+    <nav data-testid="nav-bar">
       <AppBar>
         <Container maxWidth="xl">
           <Toolbar disableGutters>            
@@ -104,8 +102,9 @@ const NaveBar = () => {
                 <Button
                   key={page}
                   sx={{ my: 2, color: 'white', display: 'block' }}
+                  onClick={navCadastrar}
                 >                 
-                  <Link to={'/novo'} className='btn-novo'> {page}</Link>
+                  {page}
                 </Button>
               ))}
             </Box>          
@@ -113,16 +112,6 @@ const NaveBar = () => {
         </Container>
     </AppBar>
   </nav>
-    // <nav>
-    //   <ul>
-    //     <li>
-    //       <Link to={'/'}>Home</Link>
-    //     </li>
-    //     <li>
-    //       <Link to={'/novo'}>Novo</Link>
-    //     </li>
-    //   </ul>
-    // </nav>
   )
 }
 
