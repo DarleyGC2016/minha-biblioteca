@@ -15,6 +15,7 @@ const NewFieldInput = (props) => {
                 onChange={props.change}
                 variant="standard"
                 name={props.name}
+                inputProps={{"data-testid": "input"}}
                 fullWidth
                 required
                 error={props.erro}

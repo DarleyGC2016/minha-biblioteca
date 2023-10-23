@@ -15,6 +15,7 @@ const NewFieldTextArea = (props) => {
                     placeholder={props.value ? props.value : props.placeholder}
                     value={props.value}
                     onChange={props.change}
+                    inputProps={{"data-testid": "text-area"}}
                     multiline
                     required
                 />

@@ -15,7 +15,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import './estilo.css'
 import { Stack } from '@mui/material';
 import HomeIcon from '../HomeIcon/HomeIcon';
-const pages = ['Cadastrar'];
+
 
 
 const NaveBar = () => {
@@ -89,24 +89,20 @@ const NaveBar = () => {
                   display: { xs: 'block', md: 'none' },
                 }}
               >
-                {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
-                  </MenuItem>
-                ))}
+                
+                <MenuItem  onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">CadastrarFechar</Typography>
+                </MenuItem>
               </Menu>
             </Box>
             <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              {pages.map((page) => (
                 <Button
-                  key={page}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                   onClick={navCadastrar}
-                >                 
-                  {page}
+                >     
+                  Novo 
                 </Button>
-              ))}
             </Box>          
           </Toolbar>
         </Container>

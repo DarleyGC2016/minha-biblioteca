@@ -14,7 +14,7 @@ import { blue, red } from '@mui/material/colors';
 function BookList() {
     const { data, mutate } = useFetch('livros');
 
-    const bookUpdate = useCallback(async (id) => {
+    const deleteBook = useCallback(async (id) => {
         Api.delete(`livros/${id}`);
         data?.map(livro => {
             if (livro.id === id){
@@ -66,7 +66,7 @@ function BookList() {
                                     <EditIcon sx={{color: blue[500]}}/>
                                 </Link>
                             </IconButton>
-                            <IconButton onClick={() => bookUpdate(livro.id)}>
+                            <IconButton onClick={() => deleteBook(livro.id)}>
                                     <DeleteIcon sx={{color: red[500]}}/>
                             </IconButton>
                         </ListItem>

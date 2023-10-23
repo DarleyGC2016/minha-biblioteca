@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react"
-import NewBook from "../pages/NewBook/NewBook"
+import NewBook from "../NewBook/NewBook"
 import "@testing-library/jest-dom"
 
 const mockNavigate = jest.fn()
