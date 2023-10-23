@@ -16,8 +16,6 @@ import './estilo.css'
 import { Stack } from '@mui/material';
 import HomeIcon from '../HomeIcon/HomeIcon';
 
-
-
 const NaveBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const navegacao = useNavigate()

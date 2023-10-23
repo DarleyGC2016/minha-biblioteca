@@ -25,7 +25,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+<<<<<<< HEAD
     "coverage": "react-scripts test --coverage --watchAll --collectCoverageFrom='src/**/**/*.{js,jsx}'",
+=======
+    "test:cov": "react-scripts test --coverage",
+>>>>>>> e80c2760375c697fd43feca5241bccb85db72965
     "eject": "react-scripts eject",
     "server": "json-server -p 3333 -d 1000 server.json"
   },
