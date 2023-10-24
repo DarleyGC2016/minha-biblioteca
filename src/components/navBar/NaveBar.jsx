@@ -10,7 +10,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 
 import './estilo.css'
 import { Stack } from '@mui/material';
@@ -87,13 +86,11 @@ const NaveBar = () => {
                   display: { xs: 'block', md: 'none' },
                 }}
               >
-                
                 <MenuItem  onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">CadastrarFechar</Typography>
+                  <Typography textAlign="center">Fechar Cadasto</Typography>
                 </MenuItem>
               </Menu>
             </Box>
-            <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                 <Button
                   sx={{ my: 2, color: 'white', display: 'block' }}

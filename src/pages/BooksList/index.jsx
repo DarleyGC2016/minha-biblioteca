@@ -11,7 +11,7 @@ import { Alert, IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import { blue, red } from '@mui/material/colors';
 
-function BookList() {
+const BookList = () => {
     const { data, mutate } = useFetch('livros');
 
     const deleteBook = useCallback(async (id) => {

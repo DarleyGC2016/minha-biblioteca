@@ -8,27 +8,6 @@
       "id": 2
     },
     {
-      "nome": "Harry Potter e o Calice do Fogo",
-      "anoPublicacao": "2008",
-      "autor": "J. K. Rowling",
-      "sinopse": "historia do Harry Potter",
-      "id": 3
-    },
-    {
-      "nome": "Caçadores de Bons",
-      "anoPublicacao": "2016",
-      "autor": "Iara | Eduardo Xavier",
-      "sinopse": "Colecionadores de bons exemplos.",
-      "id": 5
-    },
-    {
-      "nome": "O Guia ",
-      "anoPublicacao": "2008",
-      "autor": "Fernando Anselmo",
-      "sinopse": "Como fazer uma boa palestra",
-      "id": 6
-    },
-    {
       "nome": "O Hobbit",
       "anoPublicacao": "2009",
       "autor": "J.R.R. Tolkien",
@@ -41,6 +20,20 @@
       "autor": "Deus Todo Poderoso",
       "sinopse": "São as palavras de Deus",
       "id": 8
+    },
+    {
+      "nome": "O Senhor dos  Aneis: A Sociedade do Anel",
+      "anoPublicacao": "1954",
+      "autor": "J.R.R. Tolkien",
+      "sinopse": "A saga de Frodo se inicia sua tragetoria ",
+      "id": 9
+    },
+    {
+      "nome": "Harry Potter e o Calice de Fogo",
+      "anoPublicacao": "2009",
+      "autor": "J.R. Rollimg",
+      "sinopse": "Harry Potter terá que participar de um torneio entre escolas de bruxos",
+      "id": 10
     }
   ]
 }
