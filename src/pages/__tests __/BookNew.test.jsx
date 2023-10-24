@@ -12,6 +12,6 @@ jest.mock('react-router', () => {
 describe("NewBook", () =>{
     it("render NewBook", () => {
         render(<NewBook />)
-        expect(screen.getByText(/Salvar/i)).toBeInTheDocument();
+        expect(screen.getByTestId('novo-livro')).toBeInTheDocument();
     })
 })

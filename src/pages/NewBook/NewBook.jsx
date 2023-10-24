@@ -54,7 +54,7 @@ const NewBook = () => {
   }
 
   return (
-    <div className="form-novo">
+    <div className="form-novo" data-testid="novo-livro">
         <Card sx={{ minWidth: 275 }}>
             {status.type === "error"? <Alert severity="error">{status.message}</Alert>: ""}
             <form onSubmit={(e) => postBook(e)}>

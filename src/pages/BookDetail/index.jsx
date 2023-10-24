@@ -36,8 +36,7 @@ function BookDetail() {
     }
 
     useEffect(() => {
-        getLivro(id)     
-        
+        getLivro(id) 
     },[id])
 
     const editar = async (e) => {
@@ -91,7 +90,7 @@ function BookDetail() {
             <div className="form-editar">
                 {livro ?        
                     <Card sx={{ minWidth: 275 }}>
-                            <form onSubmit={(e)=> editar(e)}> 
+                            <form onSubmit={editar} data-testid="editar"> 
                                     {status.type === "error"? <Alert severity="error">{status.message}</Alert>: ""}
                                     <CardContent>
                                         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -153,17 +152,18 @@ function BookDetail() {
                                                 <Button type="submit"
                                                     sx={{ display: 'flex', justifyContent: "center",
                                                     marginLeft: "15px", marginTop: '2px', marginBottom: '25px' , width: 502}}
-                                                    variant="contained">
-                                                    Salvar
-                                                </Button> 
+                                                    variant="contained">Salvar</Button> 
                                                 <Button
                                                     sx={{ display: 'flex', justifyContent: "center",
                                                     marginLeft: "15px", marginTop: '2px', marginBottom: '25px' , width: 502, backgroundColor: red[500]}}
                                                     variant="contained"
                                                     onClick={(e) => {
-                                                    setTempLivro({...livro})
-                                                    setChanged(false)
-                                                }}>Cancelar</Button>
+                                                        setTempLivro({...livro})
+                                                        setChanged(false)
+                                                    }}
+                                                >
+                                                    Cancelar
+                                                </Button>
                                             </Stack>
                                         </CardActions>
                                     : null}

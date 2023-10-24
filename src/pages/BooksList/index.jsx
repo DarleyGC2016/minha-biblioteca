@@ -58,7 +58,7 @@ function BookList() {
 
             {data.map((livro) => (
                 <li key={`section-${livro.id}`}>
-                    <ul>
+                    <ul data-testid="excluir">
                         <ListItem key={livro.id}>
                             <ListItemText primary={livro.nome} />
                             <IconButton edge="end" aria-label="edit">
@@ -66,7 +66,7 @@ function BookList() {
                                     <EditIcon sx={{color: blue[500]}}/>
                                 </Link>
                             </IconButton>
-                            <IconButton onClick={() => deleteBook(livro.id)}>
+                            <IconButton  onClick={() => deleteBook(livro.id)}>
                                     <DeleteIcon sx={{color: red[500]}}/>
                             </IconButton>
                         </ListItem>
