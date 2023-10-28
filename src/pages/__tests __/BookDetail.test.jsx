@@ -12,6 +12,15 @@ jest.mock('react-router-dom', () => {
             }
 })
 
+const mockNavigate = jest.fn()
+const mockParams = jest.fn()
+jest.mock('react-router-dom', () => {
+    return  {    
+                useParams: () => mockParams,
+                useNavigate: () => mockNavigate
+            }
+})
+
 const renderComponent = () => {
     render(<BookDetail />)
 }

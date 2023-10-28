@@ -34,6 +34,27 @@
       "autor": "J.R. Rollimg",
       "sinopse": "Harry Potter terá que participar de um torneio entre escolas de bruxos",
       "id": 10
+    },
+    {
+      "nome": "Orgulho e Preconceito",
+      "anoPublicacao": "1813",
+      "autor": "Jane Austen",
+      "sinopse": "Pride and Prejudice é um romance da escritora britânica Jane Austen. Publicado pela primeira vez em 1813, na verdade havia sido terminado em 1797",
+      "id": 11
+    },
+    {
+      "nome": "The legend of Zelda",
+      "anoPublicacao": "2020",
+      "autor": "Nintendo",
+      "sinopse": "The legend of Zelda virou livro",
+      "id": 12
+    },
+    {
+      "nome": "Harry Potter e a Ordem da Fênix",
+      "anoPublicacao": "2003",
+      "autor": "J.K. Rowling",
+      "sinopse": "Harry Potter conhecerá uma sociedade secreta",
+      "id": 13
     }
   ]
 }
