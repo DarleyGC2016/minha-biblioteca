@@ -43,13 +43,18 @@
       "id": 11
     },
     {
-      "saveBook": {
-        "nome": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
-        "anoPublicacao": "1447",
-        "autor": "eeeeeeeeeeee",
-        "sinopse": "eeeeeeeeeeeeeeeeeeeeeeeeee"
-      },
+      "nome": "The legend of Zelda",
+      "anoPublicacao": "2020",
+      "autor": "Nintendo",
+      "sinopse": "The legend of Zelda virou livro",
       "id": 12
+    },
+    {
+      "nome": "Harry Potter e a Ordem da Fênix",
+      "anoPublicacao": "2003",
+      "autor": "J.K. Rowling",
+      "sinopse": "Harry Potter conhecerá uma sociedade secreta",
+      "id": 13
     }
   ]
 }
