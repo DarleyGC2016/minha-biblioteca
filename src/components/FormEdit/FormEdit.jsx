@@ -4,14 +4,16 @@ import NewFieldInput from '../NewFieldInput/NewFieldInput';
 import NewFieldTextArea from '../NewFieldTextArea/NewFieldTextArea';
 import { red } from "@mui/material/colors";
 
-const FormEdit = ({ book,
+const FormEdit = ({ 
+                    book,
                     editar,
                     setNome, 
                     setAnoPublicacao, 
                     setAutor,
                     setSinopse, 
                     changed, 
-                    setCancelar}) => {
+                    setCancelar
+                }) => {
     return (
         <form onSubmit={editar}> 
                 <CardContent>

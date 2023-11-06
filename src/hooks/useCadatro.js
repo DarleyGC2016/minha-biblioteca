@@ -60,7 +60,7 @@ export const useCadatro = () => {
       }    
 
   return {
-      post: postBook,
+      postBook,
       book,
       setNome,
       setAnoPublicacao,
