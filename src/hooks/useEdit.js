@@ -73,22 +73,23 @@ export const useEdit = (id) => {
     }
 
     const setAnoPublicacao = (e) => {
-    setTempLivro({...livro, anoPublicacao: e.target.value})
-    setChanged(true)
+        setTempLivro({...livro, anoPublicacao: e.target.value})
+        setChanged(true)
     }
 
     const setAutor = (e) => {
-    setTempLivro({...livro, autor: e.target.value})
-    setChanged(true)
+        setTempLivro({...livro, autor: e.target.value})
+        setChanged(true)
     }
 
     const setSinopse = (e) => {
         setTempLivro({...livro, sinopse: e.target.value})
         setChanged(true)
     } 
-    const setCancelar = (e) => {
+    const setCancelar = () => {
         setTempLivro({...livro})
         setChanged(true)
+        navegacao("/")
     } 
 
     const getLivro = async (id) => {

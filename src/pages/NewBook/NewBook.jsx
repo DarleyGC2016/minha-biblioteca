@@ -6,7 +6,7 @@ import Form from "../../components/Form/Form"
 import { useCadatro } from "../../hooks/useCadatro"
 
 const NewBook = () => { 
-    const {post,
+    const {postBook,
             book,
             setNome,
             setAnoPublicacao,
@@ -19,7 +19,7 @@ const NewBook = () => {
     <div className="form-novo" data-testid="novo-livro">
         <Card sx={{ minWidth: 275 }}>
             {status.type === "error"? <Alert severity="error">{status.message}</Alert>: ""}
-            <Form postBook={post}
+            <Form postBook={postBook}
                   book={book} 
                   setNome={setNome}
                   setAnoPublicacao={setAnoPublicacao}
